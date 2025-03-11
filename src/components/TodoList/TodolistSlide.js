@@ -1,50 +1,37 @@
-const initialState = [
-  {
-    id: 1,
-    name: "Task 1",
-    priority: "High",
-    completed: false,
-  },
-  {
-    id: 2,
-    name: "Task 2",
-    priority: "Low",
-    completed: true,
-  },
-  {
-    id: 3,
-    name: "Task 3",
-    priority: "Medium",
-    completed: true,
-  },
-];
+import { createSlice } from "@reduxjs/toolkit";
 
-const todoListReducer = (state = initialState, action) => {
-  console.log({ state, action });
-
-  /*
-   {
-    type: "todoList/addTodo",
-    payload: {
-      id: 4,
-      name: "Task 4",
+export const todoListSlice = createSlice({
+  name: "todoList",
+  initialState: [
+    {
+      id: 1,
+      name: "Task 1",
+      priority: "High",
+      completed: false,
+    },
+    {
+      id: 2,
+      name: "Task 2",
+      priority: "Low",
+      completed: true,
+    },
+    {
+      id: 3,
+      name: "Task 3",
       priority: "Medium",
       completed: true,
-      },  
-    }
-  */
-  switch (action.type) {
-    case "todoList/addTodo":
+    },
+  ],
+  reducers: {
+    addTodo: (state, action) => {
       return [...state, action.payload];
-    case "todoList/toggleTodoStatus":
+    },
+    toggleTodoStatus: (state, action) => {
       return state.map((todo) =>
         todo.id === action.payload
           ? { ...todo, completed: !todo.completed }
           : todo
       );
-    default:
-      return state;
-  }
-};
-
-export default todoListReducer;
+    },
+  },
+});

@@ -1,10 +1,10 @@
 import { Col, Row, Input, Button, Select, Tag } from "antd";
 import Todo from "../Todo";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "../../redux/actions";
 import { v4 } from "uuid";
 import { useState } from "react";
 import { todoListRemendingSelector } from "../../redux/selector";
+import { todoListSlice } from "./TodolistSlide";
 
 export default function TodoList() {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export default function TodoList() {
 
   const handleAddTodo = () => {
     dispatch(
-      addTodo({
+      todoListSlice.actions.addTodo({
         id: v4(),
         name: todoName,
         priority: priority,
